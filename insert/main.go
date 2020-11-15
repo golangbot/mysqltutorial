@@ -92,7 +92,7 @@ func createProductTable(db *sql.DB) error {
 }
 
 func insert(db *sql.DB, p product) error {
-	query := "INSERT INTO PRODUCT(product_name, product_price) VALUES (?, ?)"
+	query := "INSERT INTO product(product_name, product_price) VALUES (?, ?)"
 	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelfunc()
 	stmt, err := db.PrepareContext(ctx, query)
@@ -122,7 +122,7 @@ func insert(db *sql.DB, p product) error {
 }
 
 func multipleInsert(db *sql.DB, products []product) error {
-	query := "INSERT INTO PRODUCT(product_name, product_price) VALUES "
+	query := "INSERT INTO product(product_name, product_price) VALUES "
 	var inserts []string
 	var params []interface{}
 	for _, v := range products {
@@ -150,7 +150,7 @@ func multipleInsert(db *sql.DB, products []product) error {
 		log.Printf("Error %s when finding rows affected", err)
 		return err
 	}
-	log.Printf("%d products created simulatneously", rows)
+	log.Printf("%d products created simultaneously", rows)
 	return nil
 }
 
