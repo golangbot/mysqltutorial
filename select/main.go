@@ -188,6 +188,7 @@ func selectProductsByPrice(db *sql.DB, minPrice int, maxPrice int) ([]product, e
 	if err != nil {
 		return []product{}, err
 	}
+	defer rows.Close()
 	var products = []product{}
 	for rows.Next() {
 		var prd product
