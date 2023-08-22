@@ -33,7 +33,6 @@ func dbConnection() (*sql.DB, error) {
 		log.Printf("Error %s when opening DB\n", err)
 		return nil, err
 	}
-	//defer db.Close()
 
 	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelfunc()
@@ -47,7 +46,7 @@ func dbConnection() (*sql.DB, error) {
 		log.Printf("Error %s when fetching rows", err)
 		return nil, err
 	}
-	log.Printf("rows affected %d\n", no)
+	log.Printf("rows affected: %d\n", no)
 
 	db.Close()
 	db, err = sql.Open("mysql", dsn(dbname))
